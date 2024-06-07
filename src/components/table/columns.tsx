@@ -93,7 +93,7 @@ export const columns = (
       const IconComponent = statusIcons[task.status];
 
       return (
-        <div className="flex">
+        <div className="flex items-center">
           <IconComponent className="h-4 w-4 mr-2" />
           {task.status}
         </div>
@@ -108,7 +108,7 @@ export const columns = (
       const IconComponent = priorityIcons[task.priority];
 
       return (
-        <div className="flex">
+        <div className="flex items-center">
           <IconComponent className="h-4 w-4 mr-2" />
           {task.priority}
         </div>

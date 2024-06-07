@@ -17,19 +17,23 @@ import {
 } from "./ui/dropdown-menu";
 import { DropdownMenuShortcut } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
-import React from "react";
-import { useTheme } from "@/components/theme-provider";
+import React, { useEffect } from "react";
+import { Theme, useTheme } from "@/components/theme-provider";
 
 export default function Main() {
-  const [position, setPosition] = React.useState("bottom");
-  const { setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
+  const [dropdownTheme, setDropdownTheme] = React.useState(theme);
+
+  useEffect(() => {
+    setDropdownTheme(theme);
+  }, [theme]);
 
   return (
     <>
       <div className="p-10">
         <div className="flex justify-between items-center">
           <div>
-            <p className="text-xl font-semibold">Welcome back Valentim!</p>
+            <p className="text-2xl font-semibold">Welcome back Valentim!</p>
             <p>Here's a list of your taks</p>
           </div>
           <DropdownMenu>
@@ -61,23 +65,26 @@ export default function Main() {
                   <DropdownMenuPortal>
                     <DropdownMenuSubContent>
                       <DropdownMenuRadioGroup
-                        value={position}
-                        onValueChange={setPosition}
+                        value={dropdownTheme}
+                        onValueChange={(value) => {
+                          setDropdownTheme(value as Theme);
+                          setTheme(value as Theme);
+                        }}
                       >
                         <DropdownMenuRadioItem
-                          value="top"
+                          value="light"
                           onClick={() => setTheme("light")}
                         >
                           Light
                         </DropdownMenuRadioItem>
                         <DropdownMenuRadioItem
-                          value="bottom"
+                          value="dark"
                           onClick={() => setTheme("dark")}
                         >
                           Dark
                         </DropdownMenuRadioItem>
                         <DropdownMenuRadioItem
-                          value="right"
+                          value="system"
                           onClick={() => setTheme("system")}
                         >
                           System
