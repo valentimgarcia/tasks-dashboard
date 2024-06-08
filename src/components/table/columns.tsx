@@ -10,6 +10,10 @@ import {
   CircleX,
   CircleCheck,
   CircleDashed,
+  Star,
+  StarOff,
+  Copy,
+  SquarePen,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -23,6 +27,7 @@ import {
 import { Button } from "../ui/button";
 import { Ellipsis } from "lucide-react";
 import { toast } from "sonner";
+import { Checkbox } from "../ui/checkbox";
 
 export type Task = {
   id: string;
@@ -30,6 +35,7 @@ export type Task = {
   title: string;
   status: "In Progress" | "Backlog" | "Todo" | "Canceled" | "Done" | "Testing";
   priority: "High" | "Medium" | "Low";
+  favorite: boolean;
 };
 
 const priorityIcons = {
@@ -48,12 +54,44 @@ const statusIcons = {
 };
 
 export const columns = (
+  toggleFavorite: (id: string) => void,
   deleteTask: (id: string) => void
 ): ColumnDef<Task>[] => [
   {
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        className={`border ${
+          table.getIsAllPageRowsSelected() ? "border-green-500" : "border-white"
+        }`}
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
+        }
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label="Select all"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        className={`border ${
+          row.getIsSelected() ? "border-green-500" : "border-white"
+        }`}
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+      />
+    ),
+  },
+  {
     accessorKey: "id",
     header: "Task",
-    cell: (info) => `TASK-${info.getValue()}`,
+    cell: (info: any) => (
+      <div className="flex items-center">
+        TASK-{info.getValue()}{" "}
+        {info.row.original.favorite && <Star className="ml-2 w-5 h-5" />}
+      </div>
+    ),
   },
   {
     accessorKey: "title",
@@ -129,7 +167,12 @@ export const columns = (
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuGroup>
-              <DropdownMenuItem>Edit</DropdownMenuItem>
+              <DropdownMenuItem>
+                Edit
+                <DropdownMenuShortcut>
+                  <SquarePen className="w-4 h-4" />
+                </DropdownMenuShortcut>
+              </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => {
                   navigator.clipboard.writeText(task.id);
@@ -142,10 +185,33 @@ export const columns = (
                 }}
               >
                 Copy task ID
+                <DropdownMenuShortcut>
+                  <Copy className="ml-6 w-4 h-4" />
+                </DropdownMenuShortcut>
               </DropdownMenuItem>
-              <DropdownMenuItem>Favorite</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => toggleFavorite(task.id)}>
+                {task.favorite ? "Unfavorite" : "Favorite"}
+                <DropdownMenuShortcut>
+                  {task.favorite ? (
+                    <StarOff className="w-4 h-4" />
+                  ) : (
+                    <Star className="w-4 h-4" />
+                  )}
+                </DropdownMenuShortcut>
+              </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => deleteTask(task.id)}>
+              <DropdownMenuItem
+                onClick={() => {
+                  deleteTask(task.id);
+                  toast(`Task ID (${task.id}) deleted from dashboard`, {
+                    style: { borderColor: "hsl(var(--destructive))" },
+                    action: {
+                      label: "Close",
+                      onClick: () => {},
+                    },
+                  });
+                }}
+              >
                 Delete
                 <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
               </DropdownMenuItem>

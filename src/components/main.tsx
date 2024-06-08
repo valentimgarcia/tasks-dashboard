@@ -34,7 +34,7 @@ export default function Main() {
         <div className="flex justify-between items-center">
           <div>
             <p className="text-2xl font-semibold">Welcome back Valentim!</p>
-            <p>Here's a list of your taks</p>
+            <p className="text-muted-foreground">Here's a list of your taks</p>
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

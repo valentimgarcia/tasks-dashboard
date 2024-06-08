@@ -10,6 +10,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Create a new sort system in header component",
       status: "In Progress",
       priority: "Medium",
+      favorite: false,
     },
     {
       id: "38291",
@@ -17,6 +18,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Error adding new customer into database",
       status: "Todo",
       priority: "High",
+      favorite: true,
     },
     {
       id: "57294",
@@ -24,6 +26,7 @@ async function getTasks(): Promise<Task[]> {
       title: "History app study",
       status: "Done",
       priority: "Low",
+      favorite: false,
     },
     {
       id: "95027",
@@ -32,6 +35,7 @@ async function getTasks(): Promise<Task[]> {
         "Adding new customer should be able to accept more than one at the same time",
       status: "Testing",
       priority: "Medium",
+      favorite: false,
     },
     {
       id: "29384",
@@ -39,6 +43,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Fix alignment issue on dashboard",
       status: "In Progress",
       priority: "High",
+      favorite: false,
     },
     {
       id: "98421",
@@ -46,6 +51,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Integrate third-party payment gateway",
       status: "Todo",
       priority: "High",
+      favorite: false,
     },
     {
       id: "12837",
@@ -53,6 +59,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Implement dark mode in user settings",
       status: "Backlog",
       priority: "Medium",
+      favorite: false,
     },
     {
       id: "38472",
@@ -60,6 +67,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Update API usage guidelines",
       status: "Todo",
       priority: "Low",
+      favorite: true,
     },
     {
       id: "47562",
@@ -67,6 +75,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Optimize database queries for reporting",
       status: "Done",
       priority: "Medium",
+      favorite: false,
     },
     {
       id: "24397",
@@ -74,6 +83,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Update installation guide",
       status: "Done",
       priority: "Low",
+      favorite: false,
     },
     {
       id: "58291",
@@ -81,6 +91,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Add multi-language support",
       status: "In Progress",
       priority: "High",
+      favorite: false,
     },
     {
       id: "69374",
@@ -88,6 +99,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Resolve memory leak in analytics service",
       status: "Backlog",
       priority: "High",
+      favorite: false,
     },
     {
       id: "78461",
@@ -95,6 +107,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Document new authentication flow",
       status: "Done",
       priority: "Low",
+      favorite: false,
     },
     {
       id: "87534",
@@ -102,6 +115,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Refactor codebase to use TypeScript",
       status: "In Progress",
       priority: "Medium",
+      favorite: true,
     },
     {
       id: "10983",
@@ -109,6 +123,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Fix crash on login with invalid credentials",
       status: "Testing",
       priority: "High",
+      favorite: false,
     },
     {
       id: "12094",
@@ -116,6 +131,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Write setup guide for new developers",
       status: "In Progress",
       priority: "Low",
+      favorite: false,
     },
     {
       id: "23891",
@@ -123,6 +139,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Enhance security for API endpoints",
       status: "Todo",
       priority: "Medium",
+      favorite: false,
     },
     {
       id: "34982",
@@ -130,6 +147,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Develop mobile app for iOS and Android",
       status: "Backlog",
       priority: "High",
+      favorite: false,
     },
     {
       id: "45027",
@@ -137,6 +155,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Fix issue with email notifications not sending",
       status: "In Progress",
       priority: "High",
+      favorite: false,
     },
     {
       id: "56293",
@@ -144,6 +163,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Update user manual with new features",
       status: "Todo",
       priority: "Low",
+      favorite: false,
     },
     {
       id: "67481",
@@ -151,6 +171,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Improve load times on homepage",
       status: "Done",
       priority: "Medium",
+      favorite: false,
     },
     {
       id: "78234",
@@ -158,6 +179,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Add support for exporting data to CSV",
       status: "In Progress",
       priority: "High",
+      favorite: false,
     },
     {
       id: "89412",
@@ -165,6 +187,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Resolve issue with user profile images not loading",
       status: "Backlog",
       priority: "Medium",
+      favorite: false,
     },
     {
       id: "90134",
@@ -172,6 +195,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Document backup and restore procedures",
       status: "Done",
       priority: "Low",
+      favorite: false,
     },
     {
       id: "10385",
@@ -179,6 +203,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Migrate legacy code to modern framework",
       status: "Testing",
       priority: "Medium",
+      favorite: false,
     },
     {
       id: "11594",
@@ -186,6 +211,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Implement advanced search functionality",
       status: "In Progress",
       priority: "High",
+      favorite: false,
     },
     {
       id: "12983",
@@ -193,6 +219,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Fix pagination issue on user list",
       status: "Todo",
       priority: "High",
+      favorite: false,
     },
     {
       id: "14382",
@@ -200,6 +227,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Create API reference documentation",
       status: "Done",
       priority: "Low",
+      favorite: false,
     },
     {
       id: "15721",
@@ -207,6 +235,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Enhance user activity logging",
       status: "In Progress",
       priority: "Medium",
+      favorite: true,
     },
     {
       id: "16984",
@@ -214,6 +243,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Add real-time notifications",
       status: "Backlog",
       priority: "High",
+      favorite: false,
     },
     {
       id: "18093",
@@ -221,6 +251,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Fix intermittent logout issue",
       status: "In Progress",
       priority: "High",
+      favorite: true,
     },
     {
       id: "19273",
@@ -228,6 +259,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Document database schema",
       status: "Todo",
       priority: "Low",
+      favorite: false,
     },
     {
       id: "20462",
@@ -235,6 +267,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Improve search algorithm accuracy",
       status: "Done",
       priority: "Medium",
+      favorite: false,
     },
     {
       id: "21841",
@@ -242,6 +275,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Implement user role management",
       status: "In Progress",
       priority: "High",
+      favorite: false,
     },
     {
       id: "25734",
@@ -249,6 +283,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Refactor authentication module",
       status: "Testing",
       priority: "Medium",
+      favorite: false,
     },
     {
       id: "26982",
@@ -256,6 +291,7 @@ async function getTasks(): Promise<Task[]> {
       title: "Add user feedback system",
       status: "Todo",
       priority: "High",
+      favorite: false,
     },
   ];
 }
@@ -272,13 +308,21 @@ export default function Page() {
     setTasks(tasks);
   };
 
+  const toggleFavorite = (id: string) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === id ? { ...task, favorite: !task.favorite } : task
+      )
+    );
+  };
+
   const deleteTask = (id: string) => {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
   };
 
   return (
     <div className="mx-auto py-8">
-      <DataTable columns={columns(deleteTask)} data={tasks} />
+      <DataTable columns={columns(toggleFavorite, deleteTask)} data={tasks} />
     </div>
   );
 }

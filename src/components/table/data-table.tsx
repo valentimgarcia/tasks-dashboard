@@ -23,6 +23,7 @@ import {
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
+  Trash,
 } from "lucide-react";
 import {
   Select,
@@ -42,22 +43,26 @@ export function DataTable<TData, TValue>({
   data,
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [rowSelection, setRowSelection] = useState({});
 
   const table = useReactTable({
     columns,
     data,
-    getCoreRowModel: getCoreRowModel(),
     onColumnFiltersChange: setColumnFilters,
+    onRowSelectionChange: setRowSelection,
+    getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     state: {
       columnFilters,
+      rowSelection,
     },
   });
-
+  
+  // TODO: see what to do with Trash button
   return (
     <div>
-      <div className="my-5">
+      <div className="flex justify-between my-5">
         <Input
           className="max-w-sm"
           placeholder="Filter tasks"
@@ -66,6 +71,15 @@ export function DataTable<TData, TValue>({
             table.getColumn("title")?.setFilterValue(event.target.value)
           }
         />
+        {table.getFilteredSelectedRowModel().rows.length > 0 && (
+          <Button
+            variant={"destructive"}
+            size="icon"
+            onClick={() => console.log()}
+          >
+            <Trash />
+          </Button>
+        )}
       </div>
       <div>
         <div className="border rounded-md">
@@ -119,7 +133,10 @@ export function DataTable<TData, TValue>({
           </Table>
         </div>
         <div className="flex justify-between py-5">
-          <div>0 of {table.getRowCount()} row(s) selected</div>
+          <div className="flex items-center text-muted-foreground">
+            {table.getFilteredSelectedRowModel().rows.length} of{" "}
+            {table.getFilteredRowModel().rows.length} row(s) selected
+          </div>
           <div className="flex items-center">
             <div className="flex items-center">
               <p>Rows per page</p>
