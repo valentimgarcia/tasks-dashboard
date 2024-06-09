@@ -14,12 +14,17 @@ import {
   StarOff,
   Copy,
   SquarePen,
+  ChevronDown,
+  Check,
+  X,
 } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
@@ -28,15 +33,44 @@ import { Button } from "../ui/button";
 import { Ellipsis } from "lucide-react";
 import { toast } from "sonner";
 import { Checkbox } from "../ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { useEffect, useRef, useState } from "react";
 
 export type Task = {
   id: string;
-  type: "Feature" | "Bug" | "Documentation" | "Improvement";
+  type: TaskType;
   title: string;
-  status: "In Progress" | "Backlog" | "Todo" | "Canceled" | "Done" | "Testing";
-  priority: "High" | "Medium" | "Low";
+  status: TaskStatus;
+  priority: TaskPriority;
   favorite: boolean;
+  isEditing: boolean;
 };
+
+export type TaskType = "Feature" | "Bug" | "Documentation" | "Improvement";
+export type TaskStatus =
+  | "In Progress"
+  | "Backlog"
+  | "Todo"
+  | "Canceled"
+  | "Done"
+  | "Testing";
+export type TaskPriority = "High" | "Medium" | "Low";
+
+const taskTypes: TaskType[] = [
+  "Feature",
+  "Bug",
+  "Documentation",
+  "Improvement",
+];
+const taskStatus: TaskStatus[] = [
+  "In Progress",
+  "Backlog",
+  "Todo",
+  "Canceled",
+  "Done",
+  "Testing",
+];
+const taskPrioritys: TaskPriority[] = ["High", "Medium", "Low"];
 
 const priorityIcons = {
   High: MoveUp,
@@ -54,8 +88,13 @@ const statusIcons = {
 };
 
 export const columns = (
+  toggleEdit: (id: string) => void,
   toggleFavorite: (id: string) => void,
-  deleteTask: (id: string) => void
+  deleteTask: (id: string) => void,
+  saveTask: (id: string) => void,
+  rollbackTask: (id: string) => void,
+  isEditing: boolean,
+  updateTaskTitle: (id: string, newTitle: string) => void
 ): ColumnDef<Task>[] => [
   {
     id: "select",
@@ -97,11 +136,20 @@ export const columns = (
     accessorKey: "title",
     header: "Title",
     cell: (info) => {
-      const taskTitle = info.row.original;
+      const task = info.row.original;
+      const inputRef = useRef<HTMLInputElement | null>(null);
+      const [selectedType, setSelectedType] = useState(task.type);
+
+      useEffect(() => {
+        if (task.isEditing && inputRef.current) {
+          inputRef.current.focus();
+        }
+      }, [task.isEditing]);
+
       let badgeVariant: "default" | "secondary" | "destructive" | "outline" =
         "default";
 
-      switch (taskTitle.type) {
+      switch (task.type) {
         case "Documentation":
         case "Improvement":
           badgeVariant = "secondary";
@@ -114,12 +162,54 @@ export const columns = (
       }
 
       return (
-        <>
-          <Badge variant={badgeVariant} className="mr-2">
-            {taskTitle.type}
-          </Badge>{" "}
-          {taskTitle.title}
-        </>
+        <div className="flex items-center">
+          {task.isEditing ? (
+            <>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant={badgeVariant}
+                    className="mr-2 focus-visible:ring-transparent"
+                  >
+                    {selectedType}
+                    <ChevronDown className="h-4 w-4 ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuRadioGroup
+                    value={selectedType}
+                    onValueChange={(value) => {
+                      const newValue = value as TaskType;
+                      task.type = newValue;
+                      setSelectedType(newValue);
+                    }}
+                  >
+                    {taskTypes.map((type) => (
+                      <DropdownMenuRadioItem key={type} value={type}>
+                        {type}
+                      </DropdownMenuRadioItem>
+                    ))}
+                  </DropdownMenuRadioGroup>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              <Input
+                ref={inputRef}
+                id="title"
+                value={task.title}
+                onChange={(event) =>
+                  updateTaskTitle(task.id, event.target.value)
+                }
+              />
+            </>
+          ) : (
+            <>
+              <Badge variant={badgeVariant} className="mr-2 h-fit">
+                {task.type}
+              </Badge>{" "}
+              {task.title}
+            </>
+          )}
+        </div>
       );
     },
   },
@@ -129,11 +219,48 @@ export const columns = (
     cell: (info) => {
       const task = info.row.original;
       const IconComponent = statusIcons[task.status];
+      const [selectedStatus, setSelectedStatus] = useState(task.status);
 
       return (
         <div className="flex items-center">
-          <IconComponent className="h-4 w-4 mr-2" />
-          {task.status}
+          <>
+            {task.isEditing ? (
+              <>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="secondary"
+                      className="focus-visible:ring-transparent"
+                    >
+                      {selectedStatus}
+                      <ChevronDown className="h-4 w-4 ml-2" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuRadioGroup
+                      value={selectedStatus}
+                      onValueChange={(value) => {
+                        const newValue = value as TaskStatus;
+                        task.status = newValue;
+                        setSelectedStatus(newValue);
+                      }}
+                    >
+                      {taskStatus.map((status) => (
+                        <DropdownMenuRadioItem key={status} value={status}>
+                          {status}
+                        </DropdownMenuRadioItem>
+                      ))}
+                    </DropdownMenuRadioGroup>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </>
+            ) : (
+              <>
+                <IconComponent className="h-4 w-4 mr-2" />
+                {task.status}
+              </>
+            )}
+          </>
         </div>
       );
     },
@@ -144,11 +271,48 @@ export const columns = (
     cell: (info) => {
       const task = info.row.original;
       const IconComponent = priorityIcons[task.priority];
+      const [selectedPriority, setSelectedPriority] = useState(task.priority);
 
       return (
         <div className="flex items-center">
-          <IconComponent className="h-4 w-4 mr-2" />
-          {task.priority}
+          <>
+            {task.isEditing ? (
+              <>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="secondary"
+                      className="focus-visible:ring-transparent"
+                    >
+                      {selectedPriority}
+                      <ChevronDown className="h-4 w-4 ml-2" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuRadioGroup
+                      value={selectedPriority}
+                      onValueChange={(value) => {
+                        const newValue = value as TaskPriority;
+                        task.priority = newValue;
+                        setSelectedPriority(newValue);
+                      }}
+                    >
+                      {taskPrioritys.map((priority) => (
+                        <DropdownMenuRadioItem key={priority} value={priority}>
+                          {priority}
+                        </DropdownMenuRadioItem>
+                      ))}
+                    </DropdownMenuRadioGroup>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </>
+            ) : (
+              <>
+                <IconComponent className="h-4 w-4 mr-2" />
+                {task.priority}
+              </>
+            )}
+          </>
         </div>
       );
     },
@@ -159,65 +323,88 @@ export const columns = (
       const task = info.row.original;
 
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="rounded-full">
-              <Ellipsis className="h-4 w-4"></Ellipsis>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
-                Edit
-                <DropdownMenuShortcut>
-                  <SquarePen className="w-4 h-4" />
-                </DropdownMenuShortcut>
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => {
-                  navigator.clipboard.writeText(task.id);
-                  toast(`Task ID (${task.id}) copied to your system`, {
-                    action: {
-                      label: "Close",
-                      onClick: () => {},
-                    },
-                  });
-                }}
+        <>
+          {task.isEditing ? (
+            <div className="flex justify-center">
+              <Button
+                size="icon"
+                className="mr-3"
+                onClick={() => saveTask(task.id)}
               >
-                Copy task ID
-                <DropdownMenuShortcut>
-                  <Copy className="ml-6 w-4 h-4" />
-                </DropdownMenuShortcut>
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => toggleFavorite(task.id)}>
-                {task.favorite ? "Unfavorite" : "Favorite"}
-                <DropdownMenuShortcut>
-                  {task.favorite ? (
-                    <StarOff className="w-4 h-4" />
-                  ) : (
-                    <Star className="w-4 h-4" />
-                  )}
-                </DropdownMenuShortcut>
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem
-                onClick={() => {
-                  deleteTask(task.id);
-                  toast(`Task ID (${task.id}) deleted from dashboard`, {
-                    style: { borderColor: "hsl(var(--destructive))" },
-                    action: {
-                      label: "Close",
-                      onClick: () => {},
-                    },
-                  });
-                }}
+                <Check className="h-4 w-4" />
+              </Button>
+              <Button
+                size="icon"
+                variant="destructive"
+                onClick={() => rollbackTask(task.id)}
               >
-                Delete
-                <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+          ) : !isEditing ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="rounded-full">
+                  <Ellipsis className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuGroup>
+                  <DropdownMenuItem onClick={() => toggleEdit(task.id)}>
+                    Edit
+                    <DropdownMenuShortcut>
+                      <SquarePen className="w-4 h-4" />
+                    </DropdownMenuShortcut>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => {
+                      navigator.clipboard.writeText(task.id);
+                      toast(`Task ID (${task.id}) copied to your system`, {
+                        action: {
+                          label: "Close",
+                          onClick: () => {},
+                        },
+                      });
+                    }}
+                  >
+                    Copy task ID
+                    <DropdownMenuShortcut>
+                      <Copy className="ml-6 w-4 h-4" />
+                    </DropdownMenuShortcut>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => toggleFavorite(task.id)}>
+                    {task.favorite ? "Unfavorite" : "Favorite"}
+                    <DropdownMenuShortcut>
+                      {task.favorite ? (
+                        <StarOff className="w-4 h-4" />
+                      ) : (
+                        <Star className="w-4 h-4" />
+                      )}
+                    </DropdownMenuShortcut>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem
+                    onClick={() => {
+                      deleteTask(task.id);
+                      toast(`Task ID (${task.id}) deleted from dashboard`, {
+                        style: { borderColor: "hsl(var(--destructive))" },
+                        action: {
+                          label: "Close",
+                          onClick: () => {},
+                        },
+                      });
+                    }}
+                  >
+                    Delete
+                    <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <div className="h-9"></div>
+          )}
+        </>
       );
     },
   },

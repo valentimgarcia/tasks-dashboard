@@ -24,6 +24,7 @@ import {
   ChevronsLeft,
   ChevronsRight,
   Trash,
+  PlusCircle,
 } from "lucide-react";
 import {
   Select,
@@ -58,11 +59,11 @@ export function DataTable<TData, TValue>({
       rowSelection,
     },
   });
-  
+
   // TODO: see what to do with Trash button
   return (
     <div>
-      <div className="flex justify-between my-5">
+      <div className="flex justify-between items-center my-5">
         <Input
           className="max-w-sm"
           placeholder="Filter tasks"
@@ -71,15 +72,17 @@ export function DataTable<TData, TValue>({
             table.getColumn("title")?.setFilterValue(event.target.value)
           }
         />
-        {table.getFilteredSelectedRowModel().rows.length > 0 && (
-          <Button
-            variant={"destructive"}
-            size="icon"
-            onClick={() => console.log()}
-          >
-            <Trash />
+        <div className="flex">
+          {table.getFilteredSelectedRowModel().rows.length > 0 && (
+            <Button variant={"destructive"} size="icon" className="mr-4">
+              <Trash />
+            </Button>
+          )}
+          <Button variant={"secondary"} onClick={() => console.log()}>
+            <PlusCircle className="w-4 h-4 mr-2" />
+            New task
           </Button>
-        )}
+        </div>
       </div>
       <div>
         <div className="border rounded-md">
@@ -152,7 +155,9 @@ export function DataTable<TData, TValue>({
                 </SelectTrigger>
                 <SelectContent side="top">
                   {[10, 25, 50].map((pageSize) => (
-                    <SelectItem value={`${pageSize}`}>{pageSize}</SelectItem>
+                    <SelectItem key={pageSize} value={`${pageSize}`}>
+                      {pageSize}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>

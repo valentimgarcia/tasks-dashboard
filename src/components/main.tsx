@@ -101,7 +101,6 @@ export default function Main() {
                   Settings
                   <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
                 </DropdownMenuItem>
-                <DropdownMenuItem>New Team</DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
                   Log out

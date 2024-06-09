@@ -11,6 +11,7 @@ async function getTasks(): Promise<Task[]> {
       status: "In Progress",
       priority: "Medium",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "38291",
@@ -19,6 +20,7 @@ async function getTasks(): Promise<Task[]> {
       status: "Todo",
       priority: "High",
       favorite: true,
+      isEditing: false,
     },
     {
       id: "57294",
@@ -27,6 +29,7 @@ async function getTasks(): Promise<Task[]> {
       status: "Done",
       priority: "Low",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "95027",
@@ -36,6 +39,7 @@ async function getTasks(): Promise<Task[]> {
       status: "Testing",
       priority: "Medium",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "29384",
@@ -44,6 +48,7 @@ async function getTasks(): Promise<Task[]> {
       status: "In Progress",
       priority: "High",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "98421",
@@ -52,6 +57,7 @@ async function getTasks(): Promise<Task[]> {
       status: "Todo",
       priority: "High",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "12837",
@@ -60,6 +66,7 @@ async function getTasks(): Promise<Task[]> {
       status: "Backlog",
       priority: "Medium",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "38472",
@@ -68,6 +75,7 @@ async function getTasks(): Promise<Task[]> {
       status: "Todo",
       priority: "Low",
       favorite: true,
+      isEditing: false,
     },
     {
       id: "47562",
@@ -76,6 +84,7 @@ async function getTasks(): Promise<Task[]> {
       status: "Done",
       priority: "Medium",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "24397",
@@ -84,6 +93,7 @@ async function getTasks(): Promise<Task[]> {
       status: "Done",
       priority: "Low",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "58291",
@@ -92,6 +102,7 @@ async function getTasks(): Promise<Task[]> {
       status: "In Progress",
       priority: "High",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "69374",
@@ -100,6 +111,7 @@ async function getTasks(): Promise<Task[]> {
       status: "Backlog",
       priority: "High",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "78461",
@@ -108,6 +120,7 @@ async function getTasks(): Promise<Task[]> {
       status: "Done",
       priority: "Low",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "87534",
@@ -116,6 +129,7 @@ async function getTasks(): Promise<Task[]> {
       status: "In Progress",
       priority: "Medium",
       favorite: true,
+      isEditing: false,
     },
     {
       id: "10983",
@@ -124,6 +138,7 @@ async function getTasks(): Promise<Task[]> {
       status: "Testing",
       priority: "High",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "12094",
@@ -132,6 +147,7 @@ async function getTasks(): Promise<Task[]> {
       status: "In Progress",
       priority: "Low",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "23891",
@@ -140,6 +156,7 @@ async function getTasks(): Promise<Task[]> {
       status: "Todo",
       priority: "Medium",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "34982",
@@ -148,6 +165,7 @@ async function getTasks(): Promise<Task[]> {
       status: "Backlog",
       priority: "High",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "45027",
@@ -156,6 +174,7 @@ async function getTasks(): Promise<Task[]> {
       status: "In Progress",
       priority: "High",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "56293",
@@ -164,6 +183,7 @@ async function getTasks(): Promise<Task[]> {
       status: "Todo",
       priority: "Low",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "67481",
@@ -172,6 +192,7 @@ async function getTasks(): Promise<Task[]> {
       status: "Done",
       priority: "Medium",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "78234",
@@ -180,6 +201,7 @@ async function getTasks(): Promise<Task[]> {
       status: "In Progress",
       priority: "High",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "89412",
@@ -188,6 +210,7 @@ async function getTasks(): Promise<Task[]> {
       status: "Backlog",
       priority: "Medium",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "90134",
@@ -196,6 +219,7 @@ async function getTasks(): Promise<Task[]> {
       status: "Done",
       priority: "Low",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "10385",
@@ -204,6 +228,7 @@ async function getTasks(): Promise<Task[]> {
       status: "Testing",
       priority: "Medium",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "11594",
@@ -212,6 +237,7 @@ async function getTasks(): Promise<Task[]> {
       status: "In Progress",
       priority: "High",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "12983",
@@ -220,6 +246,7 @@ async function getTasks(): Promise<Task[]> {
       status: "Todo",
       priority: "High",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "14382",
@@ -228,6 +255,7 @@ async function getTasks(): Promise<Task[]> {
       status: "Done",
       priority: "Low",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "15721",
@@ -236,6 +264,7 @@ async function getTasks(): Promise<Task[]> {
       status: "In Progress",
       priority: "Medium",
       favorite: true,
+      isEditing: false,
     },
     {
       id: "16984",
@@ -244,6 +273,7 @@ async function getTasks(): Promise<Task[]> {
       status: "Backlog",
       priority: "High",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "18093",
@@ -252,6 +282,7 @@ async function getTasks(): Promise<Task[]> {
       status: "In Progress",
       priority: "High",
       favorite: true,
+      isEditing: false,
     },
     {
       id: "19273",
@@ -260,6 +291,7 @@ async function getTasks(): Promise<Task[]> {
       status: "Todo",
       priority: "Low",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "20462",
@@ -268,6 +300,7 @@ async function getTasks(): Promise<Task[]> {
       status: "Done",
       priority: "Medium",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "21841",
@@ -276,6 +309,7 @@ async function getTasks(): Promise<Task[]> {
       status: "In Progress",
       priority: "High",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "25734",
@@ -284,6 +318,7 @@ async function getTasks(): Promise<Task[]> {
       status: "Testing",
       priority: "Medium",
       favorite: false,
+      isEditing: false,
     },
     {
       id: "26982",
@@ -292,12 +327,15 @@ async function getTasks(): Promise<Task[]> {
       status: "Todo",
       priority: "High",
       favorite: false,
+      isEditing: false,
     },
   ];
 }
 
 export default function Page() {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [originalTask, setOriginalTask] = useState<Task | null>(null);
 
   useEffect(() => {
     getData();
@@ -306,6 +344,24 @@ export default function Page() {
   const getData = async () => {
     const tasks = await getTasks();
     setTasks(tasks);
+  };
+
+  const toggleEdit = (id: string) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) => {
+        if (task.id === id) {
+          const isEditing = !task.isEditing;
+          setIsEditing(isEditing);
+          if (isEditing) {
+            setOriginalTask({ ...task });
+          } else {
+            setOriginalTask(null);
+          }
+          return { ...task, isEditing };
+        }
+        return { ...task, isEditing: false };
+      })
+    );
   };
 
   const toggleFavorite = (id: string) => {
@@ -320,9 +376,45 @@ export default function Page() {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
   };
 
+  const saveTask = (id: string) => {
+    setIsEditing(false);
+    toggleEdit(id);
+  };
+
+  const updateTaskTitle = (id: string, newTitle: string) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === id ? { ...task, title: newTitle } : task
+      )
+    );
+  };
+
+  const rollbackTask = (id: string) => {
+    if (originalTask) {
+      setTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task.id === id ? { ...originalTask, isEditing: false } : task
+        )
+      );
+      setIsEditing(false);
+      setOriginalTask(null);
+    }
+  };
+
   return (
     <div className="mx-auto py-8">
-      <DataTable columns={columns(toggleFavorite, deleteTask)} data={tasks} />
+      <DataTable
+        columns={columns(
+          toggleEdit,
+          toggleFavorite,
+          deleteTask,
+          saveTask,
+          rollbackTask,
+          isEditing,
+          updateTaskTitle
+        )}
+        data={tasks}
+      />
     </div>
   );
 }
