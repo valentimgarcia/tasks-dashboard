@@ -35,6 +35,7 @@ import { toast } from "sonner";
 import { Checkbox } from "../ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { useEffect, useRef, useState } from "react";
+import SortableHeader from "./column-sortable-header";
 
 export type Task = {
   id: string;
@@ -134,7 +135,7 @@ export const columns = (
   },
   {
     accessorKey: "title",
-    header: "Title",
+    header: ({ column }) => <SortableHeader column={column} label="Title" />,
     cell: (info) => {
       const task = info.row.original;
       const inputRef = useRef<HTMLInputElement | null>(null);
@@ -215,7 +216,7 @@ export const columns = (
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: ({ column }) => <SortableHeader column={column} label="Status" />,
     cell: (info) => {
       const task = info.row.original;
       const IconComponent = statusIcons[task.status];
@@ -267,7 +268,7 @@ export const columns = (
   },
   {
     accessorKey: "priority",
-    header: "Priority",
+    header: ({ column }) => <SortableHeader column={column} label="Priority" />,
     cell: (info) => {
       const task = info.row.original;
       const IconComponent = priorityIcons[task.priority];
