@@ -15,6 +15,8 @@ Additionally, you can paginate through tasks, mark them as favorites, and change
 
 ![image](https://github.com/valentimgarcia/tasks-dashboard/assets/96091032/a0053cb8-98f8-4d93-8865-10319c3473da)
 
+![image](https://github.com/valentimgarcia/tasks-dashboard/assets/96091032/2c7c7b73-0f9e-438f-9d39-5b4d7acc871c)
+
 ## Getting Started
 To run this project locally, follow these steps:
 
