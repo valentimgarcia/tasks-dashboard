@@ -81,7 +81,7 @@ export default function Page() {
   };
 
   return (
-    <div className="mx-auto pt-8">
+    <div className="mx-auto pt-6">
       <DataTable
         columns={columns(
           toggleEdit,
