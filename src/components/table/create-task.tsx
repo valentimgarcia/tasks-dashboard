@@ -22,6 +22,7 @@ import {
 } from "../ui/select";
 import { Task, taskPrioritys, taskStatus, taskTypes } from "./columns";
 import { Switch } from "../ui/switch";
+import { toast } from "sonner";
 
 interface CreateTaskProps {
   addTask: (task: Task) => void;
@@ -69,12 +70,22 @@ export default function CreateTask({ addTask }: CreateTaskProps) {
   const createTask = () => {
     const randomId = Math.floor(Math.random() * 90000) + 10000;
     createTaskForm.id = randomId.toString();
+
     const newTask: Task = {
       ...createTaskForm,
     } as Task;
+
     addTask(newTask);
     clearFormState();
     setIsOpen(false);
+
+    toast(`Task ID (${createTaskForm.id}) created in dashboard`, {
+      style: { borderColor: "hsl(var(--primary-foreground))" },
+      action: {
+        label: "Close",
+        onClick: () => {},
+      },
+    });
   };
 
   return (
