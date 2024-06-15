@@ -33,7 +33,7 @@ export default function Main() {
       <div className="p-10">
         <div className="flex justify-between items-center">
           <div>
-            <p className="text-2xl font-semibold">Welcome back Valentim!</p>
+            <p className="text-2xl font-semibold">Welcome back John!</p>
             <p className="text-muted-foreground">Here's a list of your taks</p>
           </div>
           <DropdownMenu>
@@ -41,16 +41,16 @@ export default function Main() {
               <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                 <Avatar className="rounded-full bg-slate-100 dark:bg-zinc-800 p-3">
                   <AvatarImage src="" />
-                  <AvatarFallback>VG</AvatarFallback>
+                  <AvatarFallback>JD</AvatarFallback>
                 </Avatar>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>
                 <div>
-                  <p className="">Valentim Garcia</p>
+                  <p className="">John Doe</p>
                   <p className="text-xs font-light">
-                    valentimgarcia@example.com
+                    johndoe@example.com
                   </p>
                 </div>
               </DropdownMenuLabel>

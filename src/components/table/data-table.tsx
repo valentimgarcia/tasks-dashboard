@@ -1,3 +1,11 @@
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -10,6 +18,15 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+  Trash,
+} from "lucide-react";
+import { useState } from "react";
+import { Button } from "../ui/button";
+import {
   Table,
   TableBody,
   TableCell,
@@ -17,33 +34,19 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-import { Input } from "@/components/ui/input";
-import { useState } from "react";
-import { Button } from "../ui/button";
-import {
-  ChevronLeft,
-  ChevronRight,
-  ChevronsLeft,
-  ChevronsRight,
-  Trash,
-  PlusCircle,
-} from "lucide-react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import CreateTask from "./create-task";
+import { Task } from "./columns";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  addTask: (task: Task) => void;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  addTask,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -71,7 +74,7 @@ export function DataTable<TData, TValue>({
     <div>
       <div className="flex justify-between items-center my-5">
         <Input
-          className="max-w-sm"
+          className="max-w-sm mr-7"
           placeholder="Filter tasks"
           value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
@@ -84,12 +87,11 @@ export function DataTable<TData, TValue>({
               <Trash />
             </Button>
           )}
-          <Button variant={"secondary"} onClick={() => console.log()}>
-            <PlusCircle className="w-4 h-4 mr-2" />
-            New task
-          </Button>
+
+          <CreateTask addTask={addTask} />
         </div>
       </div>
+
       <div>
         <div className="border rounded-md">
           <Table>
@@ -141,14 +143,15 @@ export function DataTable<TData, TValue>({
             </TableBody>
           </Table>
         </div>
-        <div className="flex justify-between py-5">
-          <div className="flex items-center text-muted-foreground">
+
+        <div className="flex flex-col md:flex-row justify-between pt-5">
+          <div className="flex items-center justify-center text-muted-foreground mb-4 md:mb-0">
             {table.getFilteredSelectedRowModel().rows.length} of{" "}
             {table.getFilteredRowModel().rows.length} row(s) selected
           </div>
-          <div className="flex items-center">
-            <div className="flex items-center">
-              <p>Rows per page</p>
+          <div className="flex flex-col md:flex-row items-center">
+            <div className="flex items-center mb-4 md:mb-0">
+              <p className="mr-2">Rows per page</p>
               <Select
                 onValueChange={(value) => {
                   table.setPageSize(Number(value));
@@ -168,46 +171,50 @@ export function DataTable<TData, TValue>({
                 </SelectContent>
               </Select>
             </div>
-            <p className="ml-7 mr-12">
-              Page {table.getState().pagination.pageIndex + 1} of{" "}
-              {table.getPageCount()}
-            </p>
-            <Button
-              className="mx-1"
-              variant="outline"
-              size="icon"
-              onClick={() => table.firstPage()}
-              disabled={!table.getCanPreviousPage()}
-            >
-              <ChevronsLeft />
-            </Button>
-            <Button
-              className="mx-1"
-              variant="outline"
-              size="icon"
-              onClick={() => table.previousPage()}
-              disabled={!table.getCanPreviousPage()}
-            >
-              <ChevronLeft />
-            </Button>
-            <Button
-              className="mx-1"
-              variant="outline"
-              size="icon"
-              onClick={() => table.nextPage()}
-              disabled={!table.getCanNextPage()}
-            >
-              <ChevronRight />
-            </Button>
-            <Button
-              className="ml-1"
-              variant="outline"
-              size="icon"
-              onClick={() => table.lastPage()}
-              disabled={!table.getCanNextPage()}
-            >
-              <ChevronsRight />
-            </Button>
+            <div className="flex flex-wrap items-center justify-between w-full md:w-auto">
+              <p className="md:mx-6 lg:mx-12">
+                Page {table.getState().pagination.pageIndex + 1} of{" "}
+                {table.getPageCount()}
+              </p>
+              <div className="flex items-center">
+                <Button
+                  className="mx-1"
+                  variant="outline"
+                  size="icon"
+                  onClick={() => table.firstPage()}
+                  disabled={!table.getCanPreviousPage()}
+                >
+                  <ChevronsLeft />
+                </Button>
+                <Button
+                  className="mx-1"
+                  variant="outline"
+                  size="icon"
+                  onClick={() => table.previousPage()}
+                  disabled={!table.getCanPreviousPage()}
+                >
+                  <ChevronLeft />
+                </Button>
+                <Button
+                  className="mx-1"
+                  variant="outline"
+                  size="icon"
+                  onClick={() => table.nextPage()}
+                  disabled={!table.getCanNextPage()}
+                >
+                  <ChevronRight />
+                </Button>
+                <Button
+                  className="mx-1"
+                  variant="outline"
+                  size="icon"
+                  onClick={() => table.lastPage()}
+                  disabled={!table.getCanNextPage()}
+                >
+                  <ChevronsRight />
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

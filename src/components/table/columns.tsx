@@ -57,13 +57,13 @@ export type TaskStatus =
   | "Testing";
 export type TaskPriority = "High" | "Medium" | "Low";
 
-const taskTypes: TaskType[] = [
+export const taskTypes: TaskType[] = [
   "Feature",
   "Bug",
   "Documentation",
   "Improvement",
 ];
-const taskStatus: TaskStatus[] = [
+export const taskStatus: TaskStatus[] = [
   "In Progress",
   "Backlog",
   "Todo",
@@ -71,7 +71,7 @@ const taskStatus: TaskStatus[] = [
   "Done",
   "Testing",
 ];
-const taskPrioritys: TaskPriority[] = ["High", "Medium", "Low"];
+export const taskPrioritys: TaskPriority[] = ["High", "Medium", "Low"];
 
 const priorityIcons = {
   High: MoveUp,

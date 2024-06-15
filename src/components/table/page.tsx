@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Task, columns } from "./columns";
 import { DataTable } from "./data-table";
-import { tasks } from "./tasks-mock";
+import { tasks } from "../data/tasks-mock";
 
 async function getTasks(): Promise<Task[]> {
   return tasks;
@@ -76,8 +76,12 @@ export default function Page() {
     }
   };
 
+  const addTask = (newTask: Task) => {
+    setTasks((prevTasks) => [newTask, ...prevTasks]);
+  };
+
   return (
-    <div className="mx-auto py-8">
+    <div className="mx-auto pt-8">
       <DataTable
         columns={columns(
           toggleEdit,
@@ -89,6 +93,7 @@ export default function Page() {
           updateTaskTitle
         )}
         data={tasks}
+        addTask={addTask}
       />
     </div>
   );

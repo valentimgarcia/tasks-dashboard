@@ -1,4 +1,4 @@
-import { Task } from "./columns";
+import { Task } from "../table/columns";
 
 export const tasks: Task[] = [
   {
