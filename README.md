@@ -13,7 +13,7 @@ Additionally, you can paginate through tasks, mark them as favorites, and change
 - Tailwind
 - Shadcn UI
 
-![image](https://github.com/valentimgarcia/tasks-dashboard/assets/96091032/8cde1160-b8e2-4e60-9ef4-50361a96822c)
+![image](https://github.com/valentimgarcia/tasks-dashboard/assets/96091032/a0053cb8-98f8-4d93-8865-10319c3473da)
 
 ## Getting Started
 To run this project locally, follow these steps:
