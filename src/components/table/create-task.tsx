@@ -105,7 +105,7 @@ export default function CreateTask({ addTask }: CreateTaskProps) {
         </DialogHeader>
 
         <div className="flex justify-between items-end pt-4">
-          <div className="w-[15.5rem] sm:w-[18.9rem]">
+          <div className="sm:w-[18.9rem]" >
             <p className="mb-1">Title</p>
             <Input
               placeholder="Type your task title"
@@ -113,7 +113,7 @@ export default function CreateTask({ addTask }: CreateTaskProps) {
               onChange={(e) => handleFormChange("title", e.target.value)}
             />
           </div>
-          <div className="flex items-center mb-[0.4rem] mr-[2.4rem]">
+          <div className="flex items-center mb-[0.4rem] md:mr-[2.4rem]">
             <p className="mr-3">Favorite</p>
             <Switch
               onCheckedChange={(value) => handleFormChange("favorite", value)}
@@ -121,11 +121,11 @@ export default function CreateTask({ addTask }: CreateTaskProps) {
           </div>
         </div>
 
-        <div className="flex justify-between pt-2 pb-6">
+        <div className="flex flex-col md:flex-row md:justify-between pt-2 pb-6 gap-4">
           <div>
             <p className="mb-1">Type</p>
             <Select onValueChange={(value) => handleFormChange("type", value)}>
-              <SelectTrigger className="w-36 text-muted-foreground">
+              <SelectTrigger className="md:w-36 sm:w-[18.87rem] w-[11.25rem] text-muted-foreground">
                 <SelectValue placeholder="Select a type" />
               </SelectTrigger>
               <SelectContent>
@@ -145,7 +145,7 @@ export default function CreateTask({ addTask }: CreateTaskProps) {
             <Select
               onValueChange={(value) => handleFormChange("status", value)}
             >
-              <SelectTrigger className="w-36 text-muted-foreground">
+              <SelectTrigger className="md:w-36 sm:w-[18.87rem] w-[11.25rem] text-muted-foreground">
                 <SelectValue placeholder="Select a status" />
               </SelectTrigger>
               <SelectContent>
@@ -165,7 +165,7 @@ export default function CreateTask({ addTask }: CreateTaskProps) {
             <Select
               onValueChange={(value) => handleFormChange("priority", value)}
             >
-              <SelectTrigger className="w-36 text-muted-foreground">
+              <SelectTrigger className="md:w-36 sm:w-[18.87rem] w-[11.25rem] text-muted-foreground">
                 <SelectValue placeholder="Select a priority" />
               </SelectTrigger>
               <SelectContent>
@@ -186,7 +186,7 @@ export default function CreateTask({ addTask }: CreateTaskProps) {
             <Button
               type="button"
               variant="outline"
-              className="mr-3"
+              className="sm:mr-3"
               onClick={() => clearFormState()}
             >
               Cancel
@@ -194,6 +194,7 @@ export default function CreateTask({ addTask }: CreateTaskProps) {
           </DialogClose>
           <Button
             type="submit"
+            className="mb-4 md:mb-0"
             disabled={!isFormValid()}
             onClick={() => createTask()}
           >
