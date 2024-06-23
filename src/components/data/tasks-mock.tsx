@@ -1,4 +1,4 @@
-import { Task } from "../table/columns";
+import { Task } from "../data-table/columns";
 
 export const tasks: Task[] = [
   {
@@ -114,7 +114,7 @@ export const tasks: Task[] = [
     id: "78461",
     type: "Documentation",
     title: "Document new authentication flow",
-    status: "Done",
+    status: "Canceled",
     priority: "Low",
     favorite: false,
     isEditing: false,
@@ -222,7 +222,7 @@ export const tasks: Task[] = [
     id: "10385",
     type: "Improvement",
     title: "Migrate legacy code to modern framework",
-    status: "Testing",
+    status: "Canceled",
     priority: "Medium",
     favorite: false,
     isEditing: false,

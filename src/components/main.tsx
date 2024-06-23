@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
-import Page from "./table/page";
+import Page from "./data-table/page";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -33,8 +33,8 @@ export default function Main() {
       <div className="p-10">
         <div className="flex justify-between items-center">
           <div>
-            <p className="text-2xl font-semibold">Welcome back John!</p>
-            <p className="text-muted-foreground">Here's a list of your taks</p>
+            <p className="text-2xl font-semibold">Welcome back John Doe</p>
+            <p className="text-muted-foreground">Here's a list of your taks!</p>
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

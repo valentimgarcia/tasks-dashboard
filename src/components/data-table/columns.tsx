@@ -71,7 +71,47 @@ export const taskStatus: TaskStatus[] = [
   "Done",
   "Testing",
 ];
+export const taskStatusFilter = [
+  {
+    value: "In Progress",
+    icon: AlarmClock,
+  },
+  {
+    value: "Backlog",
+    icon: CircleHelp,
+  },
+  {
+    value: "Todo",
+    icon: Circle,
+  },
+  {
+    value: "Canceled",
+    icon: CircleX,
+  },
+  {
+    value: "Done",
+    icon: CircleCheck,
+  },
+  {
+    value: "Testing",
+    icon: CircleDashed,
+  },
+];
 export const taskPrioritys: TaskPriority[] = ["High", "Medium", "Low"];
+export const taskPrioritysFilter = [
+  {
+    value: "High",
+    icon: MoveUp,
+  },
+  {
+    value: "Medium",
+    icon: MoveRight,
+  },
+  {
+    value: "Low",
+    icon: MoveDown,
+  },
+];
 
 const priorityIcons = {
   High: MoveUp,
@@ -217,6 +257,9 @@ export const columns = (
   {
     accessorKey: "status",
     header: ({ column }) => <SortableHeader column={column} label="Status" />,
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
+    },
     cell: (info) => {
       const task = info.row.original;
       const IconComponent = statusIcons[task.status];
@@ -269,6 +312,9 @@ export const columns = (
   {
     accessorKey: "priority",
     header: ({ column }) => <SortableHeader column={column} label="Priority" />,
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
+    },
     cell: (info) => {
       const task = info.row.original;
       const IconComponent = priorityIcons[task.priority];

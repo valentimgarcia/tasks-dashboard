@@ -12,6 +12,8 @@ import {
   SortingState,
   flexRender,
   getCoreRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
@@ -35,7 +37,8 @@ import {
   TableRow,
 } from "../ui/table";
 import CreateTask from "./create-task";
-import { Task } from "./columns";
+import { Task, taskPrioritysFilter, taskStatusFilter } from "./columns";
+import { DataTableFilter } from "./data-table-filter";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -62,6 +65,8 @@ export function DataTable<TData, TValue>({
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
     state: {
       sorting,
       columnFilters,
@@ -73,21 +78,39 @@ export function DataTable<TData, TValue>({
   return (
     <div>
       <div className="flex justify-between items-center my-5">
-        <Input
-          className="max-w-sm mr-7"
-          placeholder="Filter tasks"
-          value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("title")?.setFilterValue(event.target.value)
-          }
-        />
+        <div className="flex">
+          <Input
+            className="max-w-sm mr-4"
+            placeholder="Filter tasks"
+            value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
+            onChange={(event) =>
+              table.getColumn("title")?.setFilterValue(event.target.value)
+            }
+          />
+
+          {table.getColumn("status") && (
+            <DataTableFilter
+              column={table.getColumn("status")}
+              title="Status"
+              options={taskStatusFilter}
+            />
+          )}
+
+          {table.getColumn("priority") && (
+            <DataTableFilter
+              column={table.getColumn("priority")}
+              title="Priority"
+              options={taskPrioritysFilter}
+            />
+          )}
+        </div>
+
         <div className="flex">
           {table.getFilteredSelectedRowModel().rows.length > 0 && (
             <Button variant={"destructive"} size="icon" className="mr-4">
               <Trash />
             </Button>
           )}
-
           <CreateTask addTask={addTask} />
         </div>
       </div>
