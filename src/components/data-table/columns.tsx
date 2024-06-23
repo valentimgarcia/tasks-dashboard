@@ -169,7 +169,7 @@ export const columns = (
     cell: (info: any) => (
       <div className="flex items-center">
         TASK-{info.getValue()}{" "}
-        {info.row.original.favorite && <Star className="ml-2 w-5 h-5" />}
+        {info.row.original.favorite && <Star className="ml-2 w-4 h-4" />}
       </div>
     ),
   },
