@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
-import Page from "./data-table/page";
+import Page from "../data-table/page";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,9 +14,9 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import { DropdownMenuShortcut } from "./ui/dropdown-menu";
-import { Button } from "./ui/button";
+} from "../ui/dropdown-menu";
+import { DropdownMenuShortcut } from "../ui/dropdown-menu";
+import { Button } from "../ui/button";
 import React, { useEffect } from "react";
 import { Theme, useTheme } from "@/components/theme-provider";
 
