@@ -47,7 +47,7 @@ export default function Main() {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>
-                <div>
+                <div className="mr-4">
                   <p className="">John Doe</p>
                   <p className="text-xs font-light">
                     johndoe@example.com

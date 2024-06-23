@@ -77,10 +77,10 @@ export function DataTable<TData, TValue>({
   // TODO: see what to do with Trash button
   return (
     <div>
-      <div className="flex justify-between items-center my-5">
-        <div className="flex">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center my-5 space-y-4 md:space-y-0">
+        <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 md:w-auto w-full">
           <Input
-            className="max-w-sm mr-4"
+            className="w-full md:w-64"
             placeholder="Filter tasks"
             value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
             onChange={(event) =>
@@ -88,26 +88,36 @@ export function DataTable<TData, TValue>({
             }
           />
 
-          {table.getColumn("status") && (
-            <DataTableFilter
-              column={table.getColumn("status")}
-              title="Status"
-              options={taskStatusFilter}
-            />
-          )}
+          <div className="flex flex-wrap items-center justify-between my-5">
+            {table.getColumn("status") && (
+              <div className="mr-4">
+                <DataTableFilter
+                  column={table.getColumn("status")}
+                  title="Status"
+                  options={taskStatusFilter}
+                />
+              </div>
+            )}
 
-          {table.getColumn("priority") && (
-            <DataTableFilter
-              column={table.getColumn("priority")}
-              title="Priority"
-              options={taskPrioritysFilter}
-            />
-          )}
+            {table.getColumn("priority") && (
+              <div>
+                <DataTableFilter
+                  column={table.getColumn("priority")}
+                  title="Priority"
+                  options={taskPrioritysFilter}
+                />
+              </div>
+            )}
+          </div>
         </div>
 
-        <div className="flex">
+        <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 w-full md:w-auto">
           {table.getFilteredSelectedRowModel().rows.length > 0 && (
-            <Button variant={"destructive"} size="icon" className="mr-4">
+            <Button
+              variant={"destructive"}
+              size="icon"
+              className="w-full md:w-auto"
+            >
               <Trash />
             </Button>
           )}

@@ -47,7 +47,7 @@ export function DataTableFilter<TData, TValue>({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="outline" className="border-dashed mr-4">
+        <Button variant="outline" className="border-dashed">
           <Filter className="mr-2 h-4 w-4" />
           {title}
           {selectedValues?.size > 0 && (
