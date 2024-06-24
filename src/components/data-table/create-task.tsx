@@ -80,7 +80,7 @@ export default function CreateTask({ addTask }: CreateTaskProps) {
     setIsOpen(false);
 
     toast(`Task ID (${createTaskForm.id}) created in dashboard`, {
-      style: { borderColor: "hsl(var(--primary-foreground))" },
+      style: { borderColor: "hsl(var(--primary))" },
       action: {
         label: "Close",
         onClick: () => {},
