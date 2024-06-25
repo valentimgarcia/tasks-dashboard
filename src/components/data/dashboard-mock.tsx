@@ -33,7 +33,7 @@ const getRandomTime = () => {
 const generateTaskHistoryData = () => {
   const today = new Date();
   const taskDetails = [
-    { usernameInitials: "AS", title: "Task created", taskId: "TASK-95027" },
+    { usernameInitials: "AS", title: "Task deleted", taskId: "TASK-95027" },
     {
       usernameInitials: "DV",
       title: "Task type changed",
@@ -60,7 +60,7 @@ const generateTaskHistoryData = () => {
       title: "Task status edited",
       taskId: "TASK-26982",
     },
-    { usernameInitials: "DR", title: "Task created", taskId: "TASK-89412" },
+    { usernameInitials: "DR", title: "Task title changed", taskId: "TASK-89412" },
     { usernameInitials: "CR", title: "Task deleted", taskId: "TASK-10983" },
     {
       usernameInitials: "AS",
@@ -72,7 +72,7 @@ const generateTaskHistoryData = () => {
       title: "Task marked as favorite",
       taskId: "TASK-25734",
     },
-    { usernameInitials: "BO", title: "Task created", taskId: "TASK-38269" },
+    { usernameInitials: "BO", title: "Task status edited", taskId: "TASK-38269" },
   ];
 
   return taskDetails.map((taskDetail, index) => {

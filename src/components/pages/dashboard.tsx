@@ -13,6 +13,8 @@ import TaskHistory from "../dashboard/task-history-card";
 import TaskChartCard from "../dashboard/task-chart-card";
 import { tasksChart } from "../data/dashboard-mock";
 import { tasks } from "../data/tasks-mock";
+import { motion } from "framer-motion";
+import { fadeIn } from "../animations";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -31,11 +33,11 @@ export default function Dashboard() {
 
   const getInProgressTasksCount = () => {
     return tasks.filter((task) => task.status === "In Progress").length;
-  }
+  };
 
   const getHighTasksCount = () => {
     return tasks.filter((task) => task.priority === "High").length;
-  }
+  };
 
   return (
     <div className="p-10">
@@ -62,39 +64,83 @@ export default function Dashboard() {
       </div>
       <div className="mx-auto pt-6">
         <div className="grid lg:grid-cols-4 sm:grid-cols-2 gap-4 my-5">
-          <TaskCard
-            title="Tasks done"
-            icon={CircleCheck}
-            value={getDoneTasksCount()}
-            percentage={16}
-          />
-          <TaskCard
-            title="Tasks in progress"
-            icon={AlarmClock}
-            value={getInProgressTasksCount()}
-            percentage={9}
-          />
-          <TaskCard
-            title="Tasks with high priority"
-            icon={MoveUp}
-            value={getHighTasksCount()}
-            percentage={21}
-          />
-          <TaskCard
-            title="Tasks created"
-            icon={PlusCircle}
-            value={getTotalTasks()}
-            percentage={14}
-          />
+          <motion.div
+            variants={fadeIn("right", 0.1)}
+            initial="hidden"
+            whileInView={"show"}
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            <TaskCard
+              title="Tasks done"
+              icon={CircleCheck}
+              value={getDoneTasksCount()}
+              percentage={16}
+            />
+          </motion.div>
+
+          <motion.div
+            variants={fadeIn("right", 0.1)}
+            initial="hidden"
+            whileInView={"show"}
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            <TaskCard
+              title="Tasks in progress"
+              icon={AlarmClock}
+              value={getInProgressTasksCount()}
+              percentage={9}
+            />
+          </motion.div>
+
+          <motion.div
+            variants={fadeIn("left", 0.1)}
+            initial="hidden"
+            whileInView={"show"}
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            <TaskCard
+              title="Tasks with high priority"
+              icon={MoveUp}
+              value={getHighTasksCount()}
+              percentage={21}
+            />
+          </motion.div>
+
+          <motion.div
+            variants={fadeIn("left", 0.1)}
+            initial="hidden"
+            whileInView={"show"}
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            <TaskCard
+              title="Tasks created"
+              icon={PlusCircle}
+              value={getTotalTasks()}
+              percentage={14}
+            />
+          </motion.div>
         </div>
 
         <div className="grid lg:grid-cols-10 md:grid-cols-7 gap-4">
-          <div className="lg:col-span-6 md:col-span-4">
+          <motion.div
+            className="lg:col-span-6 md:col-span-4"
+            variants={fadeIn("right", 0.2)}
+            initial="hidden"
+            whileInView={"show"}
+            viewport={{ once: true, amount: 0.5 }}
+          >
             <TaskChartCard totalTasks={getTotalTasks()} />
-          </div>
-          <div className="lg:col-span-4 md:col-span-3">
+          </motion.div>
+          
+          <motion.div
+            className="lg:col-span-4 md:col-span-3"
+            variants={fadeIn("left", 0.2)}
+            initial="hidden"
+            whileInView={"show"}
+            viewport={{ once: true, amount: 0.5 }}
+          >
             <TaskHistory />
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

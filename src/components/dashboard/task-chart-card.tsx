@@ -41,7 +41,12 @@ export default function TaskChartCard({ totalTasks }: TaskChartCardProps) {
             <XAxis dataKey="name" tickLine={false} axisLine={false} dy={10} />
             <YAxis axisLine={false} tickLine={false} />
 
-            <Line type="monotone" dataKey="amt" stroke="hsl(var(--primary))" />
+            <Line
+              type="monotone"
+              dataKey="amt"
+              stroke="hsl(var(--primary))"
+              animationBegin={750}
+            />
           </LineChart>
         </ResponsiveContainer>
       </CardContent>
