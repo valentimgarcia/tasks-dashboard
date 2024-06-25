@@ -1,3 +1,5 @@
+import { format, subDays, setHours, setMinutes } from "date-fns";
+
 export interface TaskChart {
   name: string;
   amt: number;
@@ -10,86 +12,79 @@ export interface TaskHistory {
   taskId: string;
 }
 
-export const tasksChart: TaskChart[] = [
-  {
-    name: "18-06",
-    amt: 2,
-  },
-  {
-    name: "19-06",
-    amt: 1,
-  },
-  {
-    name: "22-06",
-    amt: 11,
-  },
-  {
-    name: "23-06",
-    amt: 3,
-  },
-  {
-    name: "24-06",
-    amt: 7,
-  },
-  {
-    name: "25-06",
-    amt: 4,
-  },
-];
+const generateTaskChartData = () => {
+  const today = new Date();
+  const amtValues = [2, 1, 11, 3, 7, 4];
+  return amtValues.map((amt, index) => {
+    const date = subDays(today, amtValues.length - index - 1);
+    return {
+      name: format(date, "dd-MM"),
+      amt: amt,
+    };
+  });
+};
 
-export const tasksHistory: TaskHistory[] = [
-  {
-    usernameInitials: "AS",
-    title: "Task created",
-    date: "25-06-2024 12:09",
-    taskId: "TASK-95027",
-  },
-  {
-    usernameInitials: "JD",
-    title: "Task title edited",
-    date: "24-06-2024 16:09",
-    taskId: "TASK-67481",
-  },
-  {
-    usernameInitials: "CR",
-    title: "Task marked as favorite",
-    date: "24-06-2024 11:24",
-    taskId: "TASK-38472",
-  },
-  {
-    usernameInitials: "RD",
-    title: "Task deleted",
-    date: "23-06-2024 09:47",
-    taskId: "TASK-15739",
-  },
-  {
-    usernameInitials: "BO",
-    title: "Task priority edited",
-    date: "23-06-2024 08:53",
-    taskId: "TASK-78234",
-  },
-  {
-    usernameInitials: "JD",
-    title: "Task status edited",
-    date: "22-06-2024 21:14",
-    taskId: "TASK-26982",
-  },
-  {
-    usernameInitials: "DR",
-    title: "Task created",
-    date: "19-06-2024 21:14",
-    taskId: "TASK-89412",
-  },
-  {
-    usernameInitials: "CR",
-    title: "Task deleted",
-    date: "19-06-2024 19:35",
-    taskId: "TASK-10983",
-  },
-  {
-    usernameInitials: "AS",
-    title: "Task type changed",
-    date: "19-06-2024 17:42",
-    taskId: "TASK-45027",
-  },
-];
+const getRandomTime = () => {
+  const randomHour = Math.floor(Math.random() * 10) + 8;
+  const randomMinute = Math.floor(Math.random() * 60);
+  return { randomHour, randomMinute };
+};
+
+const generateTaskHistoryData = () => {
+  const today = new Date();
+  const taskDetails = [
+    { usernameInitials: "AS", title: "Task created", taskId: "TASK-95027" },
+    {
+      usernameInitials: "DV",
+      title: "Task type changed",
+      taskId: "TASK-12094",
+    },
+    {
+      usernameInitials: "JD",
+      title: "Task title edited",
+      taskId: "TASK-67481",
+    },
+    {
+      usernameInitials: "CR",
+      title: "Task marked as favorite",
+      taskId: "TASK-38472",
+    },
+    { usernameInitials: "RD", title: "Task deleted", taskId: "TASK-15739" },
+    {
+      usernameInitials: "BO",
+      title: "Task priority edited",
+      taskId: "TASK-78234",
+    },
+    {
+      usernameInitials: "JD",
+      title: "Task status edited",
+      taskId: "TASK-26982",
+    },
+    { usernameInitials: "DR", title: "Task created", taskId: "TASK-89412" },
+    { usernameInitials: "CR", title: "Task deleted", taskId: "TASK-10983" },
+    {
+      usernameInitials: "AS",
+      title: "Task type changed",
+      taskId: "TASK-45027",
+    },
+    {
+      usernameInitials: "RD",
+      title: "Task marked as favorite",
+      taskId: "TASK-25734",
+    },
+    { usernameInitials: "BO", title: "Task created", taskId: "TASK-38269" },
+  ];
+
+  return taskDetails.map((taskDetail, index) => {
+    const date = subDays(today, Math.floor(index / 2)); // 2 tasks per day
+    const { randomHour, randomMinute } = getRandomTime();
+    const randomDate = setMinutes(setHours(date, randomHour), randomMinute);
+    return {
+      ...taskDetail,
+      date: format(randomDate, "dd-MM-yyyy HH:mm"),
+    };
+  });
+};
+
+export const tasksChart: TaskChart[] = generateTaskChartData();
+export const tasksHistory: TaskHistory[] = generateTaskHistoryData();

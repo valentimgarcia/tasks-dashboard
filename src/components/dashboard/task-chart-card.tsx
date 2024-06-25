@@ -9,19 +9,19 @@ import {
   CartesianGrid,
 } from "recharts";
 
-export default function TaskChartCard() {
-  const getTotalTasks = () => {
-    return tasksChart.reduce((total, task) => total + task.amt, 0);
-  };
+interface TaskChartCardProps {
+  totalTasks: number;
+}
 
-  const totalTasks = getTotalTasks();
+export default function TaskChartCard({ totalTasks }: TaskChartCardProps) {
+  const currentYear = new Date().getFullYear();
 
   return (
     <Card className="dark:bg-gradient-to-b dark:from-[rgba(28,25,23,1)] dark:to-[rgba(28,25,23,0)]">
       <CardHeader className="space-y-0 ">
         <CardTitle className="text-base font-semibold">Tasks Created</CardTitle>
         <p className="text-muted-foreground">
-          Your team created {totalTasks} tasks this week in 2024
+          Your team created {totalTasks} tasks this week in {currentYear}
         </p>
       </CardHeader>
       <CardContent className="space-y-4 max-h-[350px] overflow-y-auto">

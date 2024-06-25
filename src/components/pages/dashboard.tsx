@@ -11,6 +11,8 @@ import {
 import TaskCard from "../dashboard/task-card";
 import TaskHistory from "../dashboard/task-history-card";
 import TaskChartCard from "../dashboard/task-chart-card";
+import { tasksChart } from "../data/dashboard-mock";
+import { tasks } from "../data/tasks-mock";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -18,6 +20,22 @@ export default function Dashboard() {
   const handleTasks = () => {
     navigate("/");
   };
+
+  const getTotalTasks = () => {
+    return tasksChart.reduce((total, task) => total + task.amt, 0);
+  };
+
+  const getDoneTasksCount = () => {
+    return tasks.filter((task) => task.status === "Done").length;
+  };
+
+  const getInProgressTasksCount = () => {
+    return tasks.filter((task) => task.status === "In Progress").length;
+  }
+
+  const getHighTasksCount = () => {
+    return tasks.filter((task) => task.priority === "High").length;
+  }
 
   return (
     <div className="p-10">
@@ -47,32 +65,32 @@ export default function Dashboard() {
           <TaskCard
             title="Tasks done"
             icon={CircleCheck}
-            value={11}
+            value={getDoneTasksCount()}
             percentage={16}
           />
           <TaskCard
             title="Tasks in progress"
             icon={AlarmClock}
-            value={4}
+            value={getInProgressTasksCount()}
             percentage={9}
           />
           <TaskCard
             title="Tasks with high priority"
             icon={MoveUp}
-            value={9}
+            value={getHighTasksCount()}
             percentage={21}
           />
           <TaskCard
             title="Tasks created"
             icon={PlusCircle}
-            value={7}
+            value={getTotalTasks()}
             percentage={14}
           />
         </div>
 
         <div className="grid lg:grid-cols-10 md:grid-cols-7 gap-4">
           <div className="lg:col-span-6 md:col-span-4">
-            <TaskChartCard />
+            <TaskChartCard totalTasks={getTotalTasks()} />
           </div>
           <div className="lg:col-span-4 md:col-span-3">
             <TaskHistory />
