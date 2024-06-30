@@ -24,7 +24,6 @@ import {
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
-  Trash,
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "../ui/button";
@@ -74,7 +73,6 @@ export function DataTable<TData, TValue>({
     },
   });
 
-  // TODO: see what to do with Trash button
   return (
     <div>
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center my-5 space-y-4 md:space-y-0">
@@ -112,15 +110,6 @@ export function DataTable<TData, TValue>({
         </div>
 
         <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 w-full md:w-auto">
-          {table.getFilteredSelectedRowModel().rows.length > 0 && (
-            <Button
-              variant={"destructive"}
-              size="icon"
-              className="w-full md:w-auto"
-            >
-              <Trash />
-            </Button>
-          )}
           <CreateTask addTask={addTask} />
         </div>
       </div>
